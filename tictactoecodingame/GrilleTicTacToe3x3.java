@@ -17,7 +17,7 @@ public class GrilleTicTacToe3x3 extends Plateau {
     Jeton[][][] grilleSav = new Jeton[100][3][3];  // Pour sauvegardr la position. 100 au maximum
 
     CoupTicTacToe[] dernierCoup;
-    int nbCoupJoue;
+    int nbCoupJoue ,nbCouJoueSav;
     Joueur vainqueur;
 
     @Override
@@ -168,6 +168,8 @@ public class GrilleTicTacToe3x3 extends Plateau {
         for (int c = 0; c < this.getNbColonnes(); c++) 
             for (int l = 0; l < this.getNbLignes(); l++) 
                    grilleSav[_index][c][l] = grille[c][l]; 
+        
+        nbCouJoueSav = nbCoupJoue;
 
     }
 
@@ -178,6 +180,7 @@ public class GrilleTicTacToe3x3 extends Plateau {
                    grille[c][l] = grilleSav[_index][c][l]; 
         
         vainqueur = null;
+        nbCoupJoue = nbCouJoueSav;
 
     }
 

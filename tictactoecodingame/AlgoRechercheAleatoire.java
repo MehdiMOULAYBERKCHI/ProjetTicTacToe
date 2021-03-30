@@ -8,10 +8,6 @@ package tictactoecodingame;
 import java.util.ArrayList;
 import java.util.Random;
 
-/**
- *
- * @author franck.tempet
- */
 public class AlgoRechercheAleatoire extends AlgoRecherche{
     Random rnd;
 

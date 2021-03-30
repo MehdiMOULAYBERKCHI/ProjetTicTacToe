@@ -8,17 +8,12 @@ package tictactoecodingame;
 import java.util.ArrayList;
 import java.util.Random;
 
-/**
- *
- * @author franck.tempet
- */
 public class AlgoRechercheMonteCarlo extends AlgoRecherche{
     Random rnd;
 
     public AlgoRechercheMonteCarlo() {
         rnd = new Random();       
     }
-    
     
     
     @Override
