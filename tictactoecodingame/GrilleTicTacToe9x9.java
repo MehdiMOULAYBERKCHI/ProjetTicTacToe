@@ -70,8 +70,8 @@ public class GrilleTicTacToe9x9 extends Plateau {
             grille3x3[coup.getColonne() / 3][coup.getLigne() / 3] = coup.getJeton();
             grilleGagnee = true;
         }
-            
-       
+
+
     }
 
     @Override
@@ -366,5 +366,4 @@ public class GrilleTicTacToe9x9 extends Plateau {
        if ( nbCoupJoue < 1 ) return null;
        return dernierCoup[nbCoupJoue-1];
     }
-
 }

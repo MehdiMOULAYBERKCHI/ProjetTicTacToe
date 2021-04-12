@@ -19,13 +19,13 @@ public class Player {
         
         // Remplacer ici l'algorithme aléatoire par votre algorithme. 
         // Pour cela créer une nouvelle classe qui hérite de la class AlgoRecherche
-        AlgoRechercheAleatoire alea  = new AlgoRechercheAleatoire( );   // L'ordinateur joue au hasard
-        joueurOrdi.setAlgoRecherche(alea);                      
+        AlgoRechercheMonteCarlo algo  = new AlgoRechercheMonteCarlo( );   // L'ordinateur joue au hasard
+        joueurOrdi.setAlgoRecherche(algo);
         
              
         GrilleTicTacToe3x3 grille = new GrilleTicTacToe3x3();
          
-        Arbitre a = new Arbitre(grille, joueurOrdi , humain);
+        Arbitre a = new Arbitre(grille, joueurOrdi, humain);
        
         a.startNewGame(true);    // Demarre une partie en affichant la grille du jeu
        

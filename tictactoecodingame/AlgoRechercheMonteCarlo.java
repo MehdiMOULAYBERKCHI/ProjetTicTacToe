@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class AlgoRechercheMonteCarlo extends AlgoRecherche {
 
     Random rnd;
-    public int maxIterations;
+    public int maxIterations = 10;
 
     public AlgoRechercheMonteCarlo() {
         rnd = new Random();
@@ -21,10 +21,20 @@ public class AlgoRechercheMonteCarlo extends AlgoRecherche {
     @Override
     public Coup meilleurCoup(Plateau _plateau, Joueur _joueur, boolean _ponder) {
 
-        Node rootNode = new Node(_plateau, _joueur);
+        Node rootNode = new Node(_plateau, _joueur); //todo rajouter le cas ou expand n'est pas possible car on est sur une feuille
         for (int iteration = 0; iteration < maxIterations; iteration++) {
-  //todo a completer
+            Node selectedNode = selectNode(rootNode);
+            System.out.println(selectedNode); //virer
+            System.out.println(selectedNode.enfants.size()); //virer
+            expand(selectedNode);
+            System.out.println(selectedNode.enfants.size()); //virer
+            Node expandedNode = selectedNode.enfants.get(0);
+            boolean isItAWin = simulate(expandedNode);
+            retropropagate(isItAWin, expandedNode, rootNode);
         }
+        Node bestNode = bestNode(rootNode);
+        Coup bestCoup = bestNode.plateau.getDernierCoup();
+        return bestCoup;
     }
 
     //renvoit le noeud selectionné avec la méthode UCT
@@ -50,13 +60,19 @@ public class AlgoRechercheMonteCarlo extends AlgoRecherche {
 
     //expend le noeud choisi
     public void expand(Node node) {
+        System.out.println(node.plateau); //virer
         ArrayList<Coup> listeCoups = node.plateau.getListeCoups(node.joueur); //todo vérifier cette ligne
+        System.out.println(listeCoups); //virer
         if (listeCoups.size() == 0) {
             //todo si on cherche à expend un noeud feuille
         } else {
             for (int indice = 0; indice < listeCoups.size(); indice++) {
                 Node newNode = new Node(node.plateau, node.joueur, node);
                 newNode.plateau.joueCoup(listeCoups.get(indice));
+                CoupTicTacToe coup = (CoupTicTacToe) newNode.plateau.getDernierCoup();
+                Joueur newjoueur = coup.getJeton().getJoueur();
+                newNode.joueur = newjoueur;
+
             }
         }
     }
@@ -94,9 +110,15 @@ public class AlgoRechercheMonteCarlo extends AlgoRecherche {
         }
     }
 
-
-    public void retropropagate(int winOrLoose) {
-
+    public void retropropagate(boolean isItAWin, Node expandedNode, Node rootNode) {
+        Node currentNode = expandedNode;
+        while(currentNode != rootNode){
+            if(isItAWin){
+                currentNode.setVictoires(currentNode.getVictoires() +1 );
+            }
+            currentNode.setVisites(currentNode.getVisites() +1 );
+            currentNode = currentNode.parent;
+        }
     }
 
     public double calcUCTScore(Node node) { //calcul le score UTC et met à jour l'attribut du noeud.
@@ -114,4 +136,19 @@ public class AlgoRechercheMonteCarlo extends AlgoRecherche {
         node.setScoreUCT(score);
         return score;
     }
+
+    public Node bestNode(Node rootNode){
+//        int bestNodeIndice = 0;
+//        double bestWinRate = rootNode.getVictoires() / rootNode.getVisites();
+//        for (int i = 0; i < rootNode.enfants.size(); i++){
+//            double winRate = rootNode.enfants.get(i).getVictoires() / rootNode.enfants.get(i).getVisites();
+//            if (winRate > bestWinRate){
+//                bestWinRate = winRate;
+//                bestNodeIndice = i;
+//            }
+//        }
+        //return rootNode.enfants.get(bestNodeIndice);
+        return rootNode.enfants.get(0);
+    }
+
 }

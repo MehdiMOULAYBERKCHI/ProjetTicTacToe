@@ -12,10 +12,11 @@ public class Node {
     double scoreUCT;
 
     public Node(Plateau plateau, Joueur joueur){ //pour un noeud racine.
-        this.plateau = plateau;
+        this.plateau = plateau.clone();
         this.joueur = joueur;
         this.visites = 0;
         this.victoires = 0;
+        this.enfants = new ArrayList<Node>();
     }
 
     public Node(Plateau plateau, Joueur joueur, Node parentNode){ //initialise un noeud enfant.
@@ -25,6 +26,7 @@ public class Node {
         this.victoires = 0;
         this.parent = parentNode;
         parentNode.enfants.add(this);
+        this.enfants = new ArrayList<Node>();
     }
 
     // setters and getters

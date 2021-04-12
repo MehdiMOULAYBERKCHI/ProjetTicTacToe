@@ -204,7 +204,7 @@ public class GrilleTicTacToe3x3 extends Plateau {
 
     @Override
     public Coup getDernierCoup() {
-        return dernierCoup[nbCoupJoue-1];
+        return dernierCoup[nbCoupJoue -1];
     }
 
 }
