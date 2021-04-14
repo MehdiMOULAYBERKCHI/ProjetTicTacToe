@@ -13,24 +13,28 @@ public class Player {
     public static void main(String args[]) {
        
        
-        JoueurHumain humain = new JoueurHumain("Humain");     
+        JoueurHumain humain = new JoueurHumain("Humain");
         JoueurOrdi joueurOrdi = new JoueurOrdi("Ordi");
+        JoueurOrdi joueurOrdi2 = new JoueurOrdi("Ordi2");
        
         
         // Remplacer ici l'algorithme aléatoire par votre algorithme. 
         // Pour cela créer une nouvelle classe qui hérite de la class AlgoRecherche
-        AlgoRechercheMonteCarlo algo  = new AlgoRechercheMonteCarlo( );   // L'ordinateur joue au hasard
+        AlgoRechercheMonteCarlo algo  = new AlgoRechercheMonteCarlo();
+        //AlgoRechercheAleatoire algo  = new AlgoRechercheAleatoire();
         joueurOrdi.setAlgoRecherche(algo);
-        
+
+        AlgoRechercheAleatoire algo2  = new AlgoRechercheAleatoire( );   // L'ordinateur joue au hasard
+        joueurOrdi2.setAlgoRecherche(algo2);
              
-        GrilleTicTacToe3x3 grille = new GrilleTicTacToe3x3();
+        GrilleTicTacToe9x9 grille = new GrilleTicTacToe9x9();
          
-        Arbitre a = new Arbitre(grille, joueurOrdi, humain);
+        Arbitre a = new Arbitre(grille, joueurOrdi2, joueurOrdi);
        
-        a.startNewGame(true);    // Demarre une partie en affichant la grille du jeu
+        //a.startNewGame(false);    // Demarre une partie en affichant la grille du jeu
        
        // Pour lancer un tournooi de 100 parties sans  afficher la grille du jeu
-       // a.startTournament(100 , false);
+       a.startTournament(100 , false);
         
     }
 }

@@ -3,25 +3,22 @@ package tictactoecodingame;
 import java.util.ArrayList;
 
 public class Node {
-    Plateau plateau;
-    Joueur joueur;
+    CoupTicTacToe coup;
     Node parent;
     ArrayList<Node> enfants;
-    int visites;
-    int victoires;
+    double visites;
+    double victoires;
     double scoreUCT;
 
-    public Node(Plateau plateau, Joueur joueur){ //pour un noeud racine.
-        this.plateau = plateau.clone();
-        this.joueur = joueur;
+    public Node(CoupTicTacToe coup){ //pour un noeud racine.
+        this.coup = coup;
         this.visites = 0;
         this.victoires = 0;
         this.enfants = new ArrayList<Node>();
     }
 
-    public Node(Plateau plateau, Joueur joueur, Node parentNode){ //initialise un noeud enfant.
-        this.plateau = plateau;
-        this.joueur = joueur;
+    public Node(CoupTicTacToe coup, Node parentNode){ //initialise un noeud enfant.
+        this.coup = coup;
         this.visites = 0;
         this.victoires = 0;
         this.parent = parentNode;
@@ -30,21 +27,24 @@ public class Node {
     }
 
     // setters and getters
-    public void setVisites(int visites){
+    public void setVisites(double visites){
         this.visites = visites;
     }
-    public int getVisites(){
+    public double getVisites(){
         return this.visites;
     }
-    public void setVictoires(int victoires){
+    public void setVictoires(double victoires){
         this.victoires = victoires;
     }
-    public int getVictoires(){
+    public double getVictoires(){
         return this.victoires;
     }
     public void setScoreUCT(double scoreUCT){
         this.scoreUCT = scoreUCT;
     }
+
+    public CoupTicTacToe getCoup(){ return this.coup;}
+    public void setCoup(CoupTicTacToe coup){ this.coup = coup; }
 
     public double getScoreUCT(){
         return this.scoreUCT;
