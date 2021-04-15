@@ -19,9 +19,6 @@ public class AlgoRechercheMinMax extends AlgoRecherche{
     Joueur joueurMechant;
     Joueur joueurMoi;
 
-    public AlgoRechercheMinMax() {
-    }
-
     @Override
     public Coup meilleurCoup(Plateau _plateau, Joueur _joueur, boolean _ponder) {
         toutPremierCoup = true;
